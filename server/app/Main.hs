@@ -16,7 +16,7 @@ main :: IO ()
 main = do
   env <- lookupEnv "PORT"
 
-  scotty (read $ env <|> "3000") $ do
+  scotty (read $ env <|> "2000") $ do
     post "/api" $ raw =<< (liftIO . api =<< body)
 
     get "/graphql" $ do
