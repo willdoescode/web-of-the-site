@@ -1,8 +1,9 @@
 import React from "react";
+import './404.css'
 
 const FourOFour = () => {
   return (
-    <div>404 swag not found</div>
+    <div className="fourOfour">404! GO BACK</div>
   )
 }
 

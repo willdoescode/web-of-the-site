@@ -1,0 +1,12 @@
+h1, h2, h3 {
+  padding-left: 5vw;
+}
+
+.home {
+  margin-top: 5vh;
+  display: flex;
+}
+
+.content {
+  margin-left: 7vw;
+}
