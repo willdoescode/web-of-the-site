@@ -8,7 +8,6 @@ import computer from './images/oldcomputer.jpeg';
 
 const App = () => {
   return <>
-
     <Router>
       <div className="header">
         <img className="computer" src={computer} alt="computer" />
