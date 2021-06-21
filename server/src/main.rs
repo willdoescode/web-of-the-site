@@ -1,13 +1,17 @@
-use std::io;
+#[macro_use]
+extern crate diesel;
+
 use std::sync::Arc;
 
 use actix_cors::Cors;
 use actix_web::{middleware, web, App, Error, HttpResponse, HttpServer};
 use juniper::http::GraphQLRequest;
 
+mod db;
+mod graphql;
 mod schema;
 
-use crate::schema::{create_schema, Schema};
+use crate::graphql::{create_schema, Schema};
 
 async fn graphiql() -> HttpResponse {
     let html = String::from_utf8(include_bytes!("playground.html").to_vec()).unwrap();
@@ -17,7 +21,7 @@ async fn graphiql() -> HttpResponse {
         .body(html)
 }
 
-async fn graphql(
+async fn graphql_handler(
     st: web::Data<Arc<Schema>>,
     data: web::Json<GraphQLRequest>,
 ) -> Result<HttpResponse, Error> {
@@ -32,11 +36,12 @@ async fn graphql(
 }
 
 #[actix_web::main]
-async fn main() -> io::Result<()> {
+async fn main() -> std::io::Result<()> {
     std::env::set_var("RUST_LOG", "actix_web=info");
     env_logger::init();
 
-    let schema = std::sync::Arc::new(create_schema());
+    let port = std::env::var("PORT").unwrap_or("8080".into());
+    let schema = Arc::new(create_schema());
 
     HttpServer::new(move || {
         App::new()
@@ -48,10 +53,10 @@ async fn main() -> io::Result<()> {
                     .allow_any_method()
                     .allow_any_origin(),
             )
-            .service(web::resource("/graphql").route(web::post().to(graphql)))
+            .service(web::resource("/graphql").route(web::post().to(graphql_handler)))
             .service(web::resource("/graphiql").route(web::get().to(graphiql)))
     })
-    .bind("127.0.0.1:8080")?
+    .bind(&format!("localhost:{}", port))?
     .run()
     .await
 }
