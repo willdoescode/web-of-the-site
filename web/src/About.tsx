@@ -15,6 +15,11 @@ const About = () => {
     <ul>
       <li><h3>Rust</h3></li>
       <li><h3>Haskell</h3></li>
+      <li><h3>Typescript</h3></li>
+      <li><h3>Golang</h3></li>
+      <li><h3>Crystal</h3></li>
+      <li><h3>C++</h3></li>
+      <li><h3>C</h3></li>
     </ul>
   </div>
 }
