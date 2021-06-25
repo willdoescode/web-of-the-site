@@ -11,7 +11,7 @@ import { createClient } from '@urql/core';
 import { Provider } from 'urql';
 
 const client = createClient({
-  url: 'http://localhost:8080/graphql',
+  url: "http://localhost:8080/graphql",
 });
 
 const App = () => (
