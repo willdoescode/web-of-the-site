@@ -6,7 +6,6 @@ import Posts from './Posts';
 import Post from './Post';
 import FourOFour from './404';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
-import computer from './images/oldcomputer.jpeg';
 import { createClient } from '@urql/core';
 import { Provider } from 'urql';
 

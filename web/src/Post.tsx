@@ -1,8 +1,8 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import './Post';
+import './Post.css';
 import { useQuery } from 'urql';
-import ReactMarkdown from 'react-markdown';
+import marked from 'marked';
 
 const postQuery =
   `
@@ -22,6 +22,7 @@ interface Param {
 
 const Post = () => {
   const { id: postId } = (useParams() as Param | undefined)!;
+  const renderer = new marked.Renderer();
 
   const [result, _reexecuteQuery] = useQuery({
     query: postQuery,
@@ -36,10 +37,7 @@ const Post = () => {
 
   return <>
     <h1>{data.postById.name}</h1>
-    <h1><ReactMarkdown>
-      {data.postById.body}
-    </ReactMarkdown>
-    </h1>
+    <div className="markdown" dangerouslySetInnerHTML={{ __html: marked(data.postById.body, { renderer }) }}></div>
   </>
 }
 
