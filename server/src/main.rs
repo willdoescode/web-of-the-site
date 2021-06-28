@@ -40,7 +40,8 @@ async fn main() -> std::io::Result<()> {
     std::env::set_var("RUST_LOG", "actix_web=info");
     env_logger::init();
 
-    let url = std::env::var("URL").unwrap_or("8080".into());
+    let url = std::env::var("URL").unwrap_or("localhost".into());
+    let port = std::env::var("PORT").unwrap_or("8080".into());
     let schema = Arc::new(create_schema());
 
     HttpServer::new(move || {
@@ -56,7 +57,7 @@ async fn main() -> std::io::Result<()> {
             .service(web::resource("/graphql").route(web::post().to(graphql_handler)))
             .service(web::resource("/graphiql").route(web::get().to(graphiql)))
     })
-    .bind(url)?
+    .bind((url, port.parse().unwrap()))?
     .run()
     .await
 }
