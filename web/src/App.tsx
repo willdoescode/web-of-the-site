@@ -18,7 +18,7 @@ const App = () => (
   <Provider value={client}>
     <Router>
       <div className="header">
-        <img className="computer" src={computer} alt="computer" />
+        <img className="computer" src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fmedia.istockphoto.com%2Fvectors%2Fold-computer-vector-illustration-vector-id586350282%3Fk%3D6%26m%3D586350282%26s%3D612x612%26w%3D0%26h%3DYk2tHku3_E-EOgNMVGIbbNywSmihhBRMwQDda9tNv-Q%3D&f=1&nofb=1" alt="computer" />
 
         <div>
           <ul className="routes">
