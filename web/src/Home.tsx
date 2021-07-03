@@ -1,8 +1,8 @@
 import React from 'react';
 import './Home.css'
 
-const Home = () => {
-  return <div className="home">
+const Home = () => (
+  <div className="home">
     <div className="text">
       <h1>Hey, I'm Will!</h1>
       <h1>You discovered my world wide web site.</h1>
@@ -16,6 +16,6 @@ const Home = () => {
       <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fmedia.giphy.com%2Fmedia%2FRBkOH90SURUas%2F200.gif&f=1&nofb=1" alt="globe" />
     </div>
   </div>
-}
+)
 
 export default Home;
